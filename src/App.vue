@@ -2,11 +2,11 @@
   <div class="">
     <nav class="nav-extended indigo">
       <div class=" nav-wrapper valign-wrapper" style="height: 100px">
-        <a href="#" class="brand-logo ml-3 title">Zeal Smoothies</a>
+        <router-link :to="{name:'home'}" class="brand-logo ml-3 title">Zeal Smoothies</router-link>
 
-        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink">
+        <router-link :to="{name:'add-smoothie'}" class="btn-floating btn-large halfway-fab waves-effect waves-light pink pulse">
           <i class="material-icons">add</i>
-        </a>
+        </router-link>
       </div>
     </nav>
     <router-view/>

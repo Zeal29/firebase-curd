@@ -2,6 +2,11 @@
   <div class="container">
     <div class="shop-cart-container">
       <div v-for="smoothie of smoothies" :key="smoothie.id" class="card hoverable">
+
+        <button @click="deleteSmoothies(smoothie.id)" class="btn-flat delete-icon btn-floating  ">
+          <i class="material-icons grey-text ">delete</i>
+        </button>
+
         <div class="card-content">
           <h2 class="indigo-text">{{smoothie.title}}</h2>
           <ul class="ingridents ">
@@ -37,6 +42,18 @@
             }
         },
 
+        methods: {
+            deleteSmoothies (id) {
+                debugger
+                this.smoothies.forEach((smoothe, i) => {
+                    if (smoothe.id === id) {
+                        this.smoothies.splice(i, 1)
+                    }
+                });
+
+            }
+        },
+
         computed: {}
 
     }
@@ -48,11 +65,21 @@
     margin-top: 30px;
   }
 
-  .shop-cart-container{
+  .shop-cart-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
     margin-top: 40px;
+  }
+
+  .delete-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .delete-icon:hover{
+    background: #ebebeb;
   }
 
 </style>
