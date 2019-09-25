@@ -13,5 +13,9 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+  nav > .nav-wrapper {
+    padding: 0 20px;
+  }
+
 </style>
