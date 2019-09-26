@@ -20,41 +20,49 @@
 </template>
 
 <script>
+    import db from '../firebase/init'
+
     export default {
-        name: 'home',
+        name      : 'home',
         components: {},
-        data() {
+        data()
+        {
             return {
                 smoothies: [
-                    {
-                        id: '1', title: 'Zeal Brew', slug: 'zeal-brew', ingredients: ['banana', 'pineapple', 'coffee']
-                    },
-                    {
-                        id: '2', title: 'Choco Mello', slug: 'choco-melo', ingredients: ['chocos', 'mellon', 'coffee']
-                    },
-                    {
-                        id: '3',
-                        title: 'Creme Cola',
-                        slug: 'creme-cola',
-                        ingredients: ['coco cola', 'pepsi', 'bon vitan']
-                    }
                 ]
             }
         },
 
         methods: {
-            deleteSmoothies (id) {
-                debugger
-                this.smoothies.forEach((smoothe, i) => {
-                    if (smoothe.id === id) {
-                        this.smoothies.splice(i, 1)
-                    }
-                });
+            deleteSmoothies: function (id) {
+
+
+                db.collection('smoothie').doc(id).delete().then(() => {
+                    this.smoothies.forEach((smoothe, i) => {
+                        if (smoothe.id === id)
+                        {
+                            this.smoothies.splice(i, 1)
+                        }
+                    });
+                })
+
 
             }
         },
 
-        computed: {}
+        computed: {},
+
+        created()
+        {
+
+            db.collection('smoothie').get().then(snapshot => {
+                let arr = snapshot.docs.map(doc => {
+                    return {...doc.data(), id: doc.id}
+                });
+
+                this.smoothies.push(...arr);
+            })
+        }
 
     }
 </script>
@@ -72,13 +80,13 @@
     margin-top: 40px;
   }
 
-  .delete-icon{
+  .delete-icon {
     position: absolute;
     top: 5px;
     right: 5px;
   }
 
-  .delete-icon:hover{
+  .delete-icon:hover {
     background: #ebebeb;
   }
 

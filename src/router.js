@@ -16,9 +16,11 @@ export default new Router({
     {
       path: '/add-smoothie',
       name: 'add-smoothie',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/ModifySmoothie.vue')
+    },
+    {
+      path: '/edit-smoothie/:slug',
+      name: 'edit-smoothie',
       component: () => import(/* webpackChunkName: "about" */ './views/ModifySmoothie.vue')
     }
   ]
