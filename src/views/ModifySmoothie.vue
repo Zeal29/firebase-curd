@@ -13,7 +13,7 @@
       </div>
 
       <div class="input-field col s12 m10 offset-m1 ">
-        <input id="Ingredient" @keydown.tab="addIngredients()" v-model="currentIngredient" type="text" class="validate">
+        <input id="Ingredient" @keydown.enter="addIngredients()" v-model="currentIngredient" type="text" class="validate">
         <label for="Ingredient">Add an Ingredient</label>
       </div>
 
@@ -57,7 +57,10 @@
                     ingredients:this.ingredients,
                     title:this.title,
                     slug:this.slug
-                }).then(res => alert(res)).catch(err => alert(err))
+                }).then(res => {
+                  alert(res);
+                  this.$router.push({name:'home'})
+                }).catch(err => alert(err))
             }
 
         },
