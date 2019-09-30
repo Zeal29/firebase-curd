@@ -106,19 +106,28 @@
       }
     },
     created () {
-      db.collection('smoothie')
-        .where('slug', '==', this.editRoutSlug)
-        .get()
-        .then(result => {
-          let data         = result.docs[0].data()
-          this.ingredients = data.ingredients
-          this.title       = data.title
-          this.id          = result.docs[0].id
 
-          this.dataIsLoading = false
+      if (this.isEditRoute)
+      {
+        db.collection('smoothie')
+          .where('slug', '==', this.editRoutSlug)
+          .get()
+          .then(result => {
+            let data         = result.docs[0].data()
+            this.ingredients = data.ingredients
+            this.title       = data.title
+            this.id          = result.docs[0].id
 
-          setTimeout(this.$refs['title'].focus, 1000)
-        })
+            this.dataIsLoading = false
+
+            setTimeout(this.$refs['title'].focus, 1000)
+          })
+      }
+      else {
+        this.dataIsLoading = false;
+      }
+
+
     },
     methods   : {
       editSmoothie () {
